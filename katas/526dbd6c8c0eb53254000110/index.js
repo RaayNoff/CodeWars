@@ -11,8 +11,28 @@
 // assert.strictEqual(alphanumeric("PassW0rd"), true)
 // assert.strictEqual(alphanumeric("     "), false)
 
+const alphanumeric = (string) => {
+    if (string.trim() === '') {
+        return false;
+    }
 
-const alphanumeric = (string) => string.split('').every(c => c.toLowerCase() != c.toUpperCase())
+    return string.split('').every(c => {
+        //Check if it's a letter
+        if (c.toLowerCase() !== c.toUpperCase()) {
+            return true;
+        }
 
+        //Check if it's a special symbol bypass empty " "
+        if (Number.isNaN(Number(c))) {
+            return false;
+        }
 
-console.log(alphanumeric("032fds1"))
+        //Check if it's a empty " "
+        if (c.trim() === "") {
+            return false
+        }
+
+        //Other symbol that we don't know
+        return true;
+    })
+}
